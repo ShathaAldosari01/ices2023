@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "704605794254",
+    "project_id": "ices2023",
+    "storage_bucket": "ices2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704605794254:android:b588cdcf99976f675cc59f",
+        "android_client_info": {
+          "package_name": "com.ksuices2023.ices2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704605794254-aq06nsjak2hmpfhnpf05aj1e0b24to77.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1hSDFmWZK1AXjg4SknlWFAszIS_aNy-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704605794254-aq06nsjak2hmpfhnpf05aj1e0b24to77.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
