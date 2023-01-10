@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ices2023/login.dart';
+import 'package:ices2023/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -113,3 +115,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
