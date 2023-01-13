@@ -1,8 +1,29 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ices2023/login.dart';
-import 'package:ices2023/register.dart';
 
-void main() {
+Future main() async{
+  //for linking flutter to firebase - Android
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  //for linking flutter to firebase - web
+  if(kIsWeb){
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: "AIzaSyDAJHOdC_SeEeZoWhWJaRvDzs5B9Njj3jE",
+          appId: "1:704605794254:web:50beffa90b49cf335cc59f",
+          messagingSenderId: "704605794254",
+          projectId: "ices2023",
+          /*optoinal*/
+          authDomain: "ices2023.firebaseapp.com",
+          storageBucket: "ices2023.appspot.com",
+          measurementId: "G-EJHT4T8BHX"
+      )
+    );
+  }
+
+  //the app
   runApp(const MyApp());
 }
 
@@ -13,6 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
