@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ices2023/config/palette.dart';
 
 import '../../services/auth.dart';
 
@@ -23,14 +24,24 @@ class _LoginState extends State<Login> {
   String password = '';
 
   //for the form
-  final _formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   //function
   Future openDialog()=> showDialog(
       context: context,
       builder: (context) =>  AlertDialog(
-          title: const Text("The login failed"),
-          content: const Text('could not log in with those credentials.'),
+          title: const Text(
+              "The login failed",
+            style: TextStyle(
+              fontFamily: 'OpenSans',
+            ),
+          ),
+          content: const Text(
+              'could not log in with those credentials.',
+            style: TextStyle(
+              fontFamily: 'OpenSans',
+            ),
+          ),
           actions: [
             Padding(
               padding: EdgeInsets.fromLTRB(0,0,20,15),
@@ -38,8 +49,9 @@ class _LoginState extends State<Login> {
                 child: const Text(
                   "Cancel",
                   style: TextStyle(
-                    color: Color(0xff47bcd0),
+                    color: Palette.blue,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
                   ),
                 ),
                 onTap: (){
@@ -56,6 +68,8 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: Colors.white,
 
+      //fix overload error
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -74,9 +88,10 @@ class _LoginState extends State<Login> {
                               child: const Text(
                                 "Skip",
                                 style: TextStyle(
-                                  color: Color(0xfff9be39),
+                                  color: Palette.yellow,
                                   fontWeight: FontWeight.w500,
                                   decoration: TextDecoration.underline,
+                                  fontFamily: 'OpenSans',
                                 ),
                               ),
                               onTap: () async{
@@ -98,7 +113,7 @@ class _LoginState extends State<Login> {
               ),
 
               Form(
-                key: _formkey,
+                key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -107,7 +122,8 @@ class _LoginState extends State<Login> {
                       "ICES2023",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 36
+                          fontSize: 36,
+                          fontFamily: 'OpenSans',
                       ),
                     ),
 
@@ -116,7 +132,8 @@ class _LoginState extends State<Login> {
                     const Text(
                       "Sciences for a Bright Future",
                       style: TextStyle(
-                          fontSize: 20
+                          fontFamily: 'OpenSans',
+                          fontSize: 20,
                       ),
                     ),
 
@@ -127,13 +144,15 @@ class _LoginState extends State<Login> {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
                           color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
+                          border: Border.all(color: Palette.white),
                         ),
                         child:  Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20 ),
                           child: TextFormField(
+                            style: const TextStyle(
+                              fontFamily: 'OpenSans',
+                            ),
                             decoration: const InputDecoration(
                                 border: InputBorder.none,
                                 hintText: "Email"
@@ -162,13 +181,15 @@ class _LoginState extends State<Login> {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
                           color: Colors.grey[200],
-                          border: Border.all(color: Colors.white),
+                          border: Border.all(color: Palette.white),
                         ),
                         child:  Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20 ),
                           child: TextFormField(
+                            style: const TextStyle(
+                              fontFamily: 'OpenSans',
+                            ),
                             obscureText: true,
                             decoration: const InputDecoration(
                                 border: InputBorder.none,
@@ -188,21 +209,20 @@ class _LoginState extends State<Login> {
                       ),
                     ),
 
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 25,),
 
                     //sign in
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24 ),
+                      padding: const EdgeInsets.symmetric(horizontal: 25 ),
                       child: Container(
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                            color: const Color(0xFF90be56),
-                            borderRadius: BorderRadius.circular(12)
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        decoration: const BoxDecoration(
+                            color: Palette.green,
                         ),
                         child:  Center(
                           child: InkWell(
                             onTap: ()async{
-                              if(_formkey.currentState!.validate() ){
+                              if(_formKey.currentState!.validate() ){
                                 dynamic result  = await _auth.logInWithEmailAndPassword(email, password);
                                 if(result == null){
                                   openDialog();
@@ -213,7 +233,8 @@ class _LoginState extends State<Login> {
                               'Log in',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 20
+                                  fontSize: 18,
+                                fontFamily: 'OpenSans',
                               ),
                             ),
                           ),
@@ -230,15 +251,16 @@ class _LoginState extends State<Login> {
                         const Text(
                           "Don't have an account? ",
                           style: TextStyle(
-                            fontWeight: FontWeight.w500,
+                            fontFamily: 'OpenSans',
                           ),
                         ),
                         InkWell(
                           child: const Text(
                             "create a new account.",
                             style: TextStyle(
-                              color:  Color(0xFF47bcd0),
-                              fontWeight: FontWeight.bold,
+                              color:  Palette.blue,
+                              fontFamily: 'OpenSans',
+                              decoration: TextDecoration.underline,
                             ),
                           ),
                           onTap: (){
