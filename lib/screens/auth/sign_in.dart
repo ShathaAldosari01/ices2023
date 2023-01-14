@@ -58,6 +58,8 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       backgroundColor: Colors.white,
 
+      //fix overload error
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
           child: Column(

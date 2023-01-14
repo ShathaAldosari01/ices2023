@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
   String password = '';
 
   //for the form
-  final _formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   //function
   Future openDialog()=> showDialog(
@@ -56,6 +56,8 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: Colors.white,
 
+      //fix overload error
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -98,7 +100,7 @@ class _LoginState extends State<Login> {
               ),
 
               Form(
-                key: _formkey,
+                key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -202,7 +204,7 @@ class _LoginState extends State<Login> {
                         child:  Center(
                           child: InkWell(
                             onTap: ()async{
-                              if(_formkey.currentState!.validate() ){
+                              if(_formKey.currentState!.validate() ){
                                 dynamic result  = await _auth.logInWithEmailAndPassword(email, password);
                                 if(result == null){
                                   openDialog();
