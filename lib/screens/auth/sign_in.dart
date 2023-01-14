@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:ices2023/services/auth.dart';
 
-import '../../services/auth.dart';
-
-class Login extends StatefulWidget {
+class SignIn extends StatefulWidget {
 
   final Function toggleView;
 
-  const Login({Key? key, required this.toggleView}) : super(key: key);
+   const SignIn({Key? key, required this.toggleView}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _LoginState extends State<Login> {
+class _SignInState extends State<SignIn> {
 
   /*Attribute*/
   final AuthService _auth = AuthService();
@@ -22,6 +21,8 @@ class _LoginState extends State<Login> {
   String email ='';
   String password = '';
 
+  String error = '';
+
   //for the form
   final _formkey = GlobalKey<FormState>();
 
@@ -29,14 +30,14 @@ class _LoginState extends State<Login> {
   Future openDialog()=> showDialog(
       context: context,
       builder: (context) =>  AlertDialog(
-          title: const Text("The login failed"),
-          content: const Text('could not log in with those credentials.'),
+          title: const Text("The Registration failed"),
+          content: const Text('Please supply a valid email.'),
           actions: [
             Padding(
               padding: EdgeInsets.fromLTRB(0,0,20,15),
               child: InkWell(
                 child: const Text(
-                  "Cancel",
+                    "Cancel",
                   style: TextStyle(
                     color: Color(0xff47bcd0),
                     fontWeight: FontWeight.bold,
@@ -50,6 +51,7 @@ class _LoginState extends State<Login> {
           ]
       )
   );
+
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +124,41 @@ class _LoginState extends State<Login> {
 
                     const SizedBox(height: 50,),
 
+                    //name
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.grey[200],
+                          border: Border.all(color: Colors.white),
+                        ),
+                        child:  Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20 ),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Full name"
+                            ),
+
+                            //validation
+                            validator: (nameValue){
+                              return nameValue!.isEmpty?"Enter your name.":null;
+                            },
+
+                            //action
+                            onChanged: (nameValue){
+                              setState(() {
+                                name = nameValue;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 10,),
+
                     //email
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -174,6 +211,7 @@ class _LoginState extends State<Login> {
                                 border: InputBorder.none,
                                 hintText: "Password"
                             ),
+
                             //validation
                             validator: (passValue){
                               return passValue!.length<8?"The password should be at least 8 characters long.":null;
@@ -199,23 +237,27 @@ class _LoginState extends State<Login> {
                             color: const Color(0xFF90be56),
                             borderRadius: BorderRadius.circular(12)
                         ),
-                        child:  Center(
+                        child: Center(
                           child: InkWell(
-                            onTap: ()async{
-                              if(_formkey.currentState!.validate() ){
-                                dynamic result  = await _auth.logInWithEmailAndPassword(email, password);
-                                if(result == null){
-                                  openDialog();
-                                }
-                              }
-                            },
                             child: const Text(
-                              'Log in',
+                              'Create Account',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20
                               ),
                             ),
+                            onTap: ()async{
+                              //create a new account
+                              if(_formkey.currentState!.validate() ){
+                                dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+                                if(result == null){
+                                  setState(() {
+                                    error = 'Please supply a valid email.';
+                                  });
+                                  openDialog();
+                                }
+                              }
+                            },
                           ),
                         ),
                       ),
@@ -226,24 +268,24 @@ class _LoginState extends State<Login> {
                     //register now
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children:  [
                         const Text(
-                          "Don't have an account? ",
+                          "Already have an account? ",
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         InkWell(
+                          onTap: (){
+                            widget.toggleView();
+                          },
                           child: const Text(
-                            "create a new account.",
+                            "Login",
                             style: TextStyle(
                               color:  Color(0xFF47bcd0),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          onTap: (){
-                            widget.toggleView();
-                          },
                         ),
                       ],
                     ),
@@ -257,5 +299,7 @@ class _LoginState extends State<Login> {
       ),
 
     );
+
+
   }
 }

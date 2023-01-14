@@ -1,7 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ices2023/services/auth.dart';
+//auth? go home: go sign up
+import 'package:provider/provider.dart';
 
+import 'models/user.dart';
 import 'screens/wrapper.dart';
 
 Future<void> main() async {
@@ -22,9 +26,8 @@ Future<void> main() async {
           measurementId: "G-EJHT4T8BHX"
       )
     );
-
-    await Firebase.initializeApp();
-  }
+  } else
+      await Firebase.initializeApp();
 
   //the app
   runApp(const MyApp());
@@ -36,9 +39,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-     home: Wrapper(),
+    return StreamProvider<Users?>.value(
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+       home: Wrapper(),
+      ),
     );
   }
 }
