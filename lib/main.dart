@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ices2023/screens/home/people/listOfPeople.dart';
 import 'package:ices2023/services/auth.dart';
 //auth? go home: go sign up
 import 'package:provider/provider.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-       home: Wrapper(),
+       home: ListOfPeople(),
       ),
     );
   }
