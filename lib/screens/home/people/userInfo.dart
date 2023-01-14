@@ -60,6 +60,7 @@ class UserInformation extends StatelessWidget {
                 style: TextStyle(fontSize:36 , fontStyle:FontStyle.normal ,color:Palette.darkBlue,fontFamily: 'OpenSans',fontWeight: FontWeight.bold ),
               ),
                   Text(formattedDate(documentSnapshot.get("date")),textAlign:TextAlign.center ,
+
                     style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans'),
                   ),
                   Text(documentSnapshot.get("paperName "),textAlign:TextAlign.center ,
