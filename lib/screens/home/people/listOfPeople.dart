@@ -2,12 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ices2023/screens/home/people/person.dart';
+import 'package:ices2023/config/palette.dart';
 
 class ListOfPeople extends StatelessWidget {
 
   Widget builUser(Person user) => ListTile(
     leading:CircleAvatar(
-        backgroundColor: Colors.amberAccent[100]) ,
+        backgroundColor: Palette.yellow) ,
     title:Text(user.name),
     subtitle:Text(user.position) ,
     trailing:Icon(Icons.arrow_forward_ios_rounded),
