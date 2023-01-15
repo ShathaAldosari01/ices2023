@@ -16,7 +16,8 @@ class UserInformation extends StatelessWidget {
   Widget build(BuildContext context){
     return Scaffold(
         appBar: AppBar(
-          title: Text(documentSnapshot.get("name")),
+          title: Text(documentSnapshot.get("name"),style: TextStyle( fontFamily: 'OpenSans'  ),),
+         backgroundColor: Palette.darkBlue,
         ),
         body: Column(
           mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
@@ -30,15 +31,15 @@ class UserInformation extends StatelessWidget {
 
                 children:[
                   Text("Person Information",textAlign:TextAlign.center ,
-                  style: TextStyle(fontSize:36 , fontStyle:FontStyle.normal , color:Palette.darkBlue,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
+                  style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal , color:Palette.darkBlue,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
 
                 ),
                   Text(documentSnapshot.get("name"),textAlign:TextAlign.center ,
-                    style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans' ),
+                    style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans' ),
 
                   ),
                   Text(documentSnapshot.get("organization"),textAlign:TextAlign.center ,
-                    style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans'),
+                    style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans'),
 
                   ),
 
@@ -57,14 +58,14 @@ class UserInformation extends StatelessWidget {
 
                 children:[
               Text("Paper Name",textAlign:TextAlign.center ,
-                style: TextStyle(fontSize:36 , fontStyle:FontStyle.normal ,color:Palette.darkBlue,fontFamily: 'OpenSans',fontWeight: FontWeight.bold ),
+                style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal ,color:Palette.darkBlue,fontFamily: 'OpenSans',fontWeight: FontWeight.bold ),
               ),
                   Text(formattedDate(documentSnapshot.get("date")),textAlign:TextAlign.center ,
 
-                    style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans'),
+                    style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans'),
                   ),
                   Text(documentSnapshot.get("paperName "),textAlign:TextAlign.center ,
-                    style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans' ),
+                    style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans' ),
                   ),
               ]
             )
@@ -77,13 +78,13 @@ class UserInformation extends StatelessWidget {
 
                 children:[
               Text("Presentation Subject",textAlign:TextAlign.center ,
-                style: TextStyle(fontSize:36 , fontStyle:FontStyle.normal ,color:Palette.darkBlue ,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
+                style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal ,color:Palette.darkBlue ,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
               ),
                   Text(formattedDate(documentSnapshot.get("date")),textAlign:TextAlign.center ,
-                    style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans'),
+                    style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans'),
                   ),
                   Text(documentSnapshot.get("PresentationName"),textAlign:TextAlign.center ,
-                    style: TextStyle(fontSize:19 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans' ),
+                    style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans' ),
                   ),
 ]
               )

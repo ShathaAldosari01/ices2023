@@ -19,7 +19,8 @@ class ListOfPeople extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
-      title: Text('People'),
+      title: Text('People',style: TextStyle( fontFamily: 'OpenSans'  ),),
+      backgroundColor: Palette.darkBlue,
     ),
     body:StreamBuilder(
       stream: FirebaseFirestore.instance
@@ -32,8 +33,8 @@ class ListOfPeople extends StatelessWidget {
            DocumentSnapshot documentSnapshot =snapshot.data!.docs[index];
            return Card(
                child:ListTile(
-                 title: Text(documentSnapshot.get("name")),
-                 subtitle:Text(documentSnapshot.get("position")) ,
+                 title: Text(documentSnapshot.get("name"),style: TextStyle( fontFamily: 'OpenSans'  ),),
+                 subtitle:Text(documentSnapshot.get("position"),style: TextStyle( fontFamily: 'OpenSans'  ),) ,
                  leading:CircleAvatar(
                      backgroundColor: Palette.yellow) ,
                  trailing:Icon(Icons.arrow_forward_ios_rounded),
