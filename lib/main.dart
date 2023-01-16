@@ -18,19 +18,20 @@ Future<void> main() async {
   //for linking flutter to firebase - web
   if(kIsWeb){
     await Firebase.initializeApp(
-      options: FirebaseOptions(
+      options: const FirebaseOptions(
           apiKey: "AIzaSyDAJHOdC_SeEeZoWhWJaRvDzs5B9Njj3jE",
           appId: "1:704605794254:web:50beffa90b49cf335cc59f",
           messagingSenderId: "704605794254",
           projectId: "ices2023",
-          /*optoinal*/
+          /*optional*/
           authDomain: "ices2023.firebaseapp.com",
           storageBucket: "ices2023.appspot.com",
           measurementId: "G-EJHT4T8BHX"
       )
     );
-  } else
-      await Firebase.initializeApp();
+  } else {
+    await Firebase.initializeApp();
+  }
 
   //the app
   runApp(const MyApp());
@@ -45,9 +46,9 @@ class MyApp extends StatelessWidget {
     return StreamProvider<Users?>.value(
       value: AuthService().user,
       initialData: null,
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-       home: ListOfAgenda(),
+       home: Wrapper(),
       ),
     );
   }

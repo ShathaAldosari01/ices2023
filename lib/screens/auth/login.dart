@@ -117,27 +117,11 @@ class _LoginState extends State<Login> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //welcome
-                    const Text(
-                      "ICES2023",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 36,
-                          fontFamily: 'OpenSans',
-                      ),
+                    //logo
+                    Container(
+                      margin:const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+                      child:Image.asset('assets/logo.png'),
                     ),
-
-                    const SizedBox(height: 10,),
-
-                    const Text(
-                      "Sciences for a Bright Future",
-                      style: TextStyle(
-                          fontFamily: 'OpenSans',
-                          fontSize: 20,
-                      ),
-                    ),
-
-                    const SizedBox(height: 50,),
 
                     //email
                     Padding(
