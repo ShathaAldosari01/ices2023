@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:ices2023/config/palette.dart';
@@ -12,12 +11,264 @@ class ListOfAgenda extends StatefulWidget {
 }
 
 class _ListOfAgendaState extends State<ListOfAgenda> {
-
   //attribute
-  String dropDownValue = 'T1-FOE:  Natural Sciences: Future of Energy';
+  String dropDownValue =  'T1-FOE:  Natural Sciences: Future of Energy';
 
   // List of items in our dropdown menu
   var items = [
+    //t1
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T1-FOE:  ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Natural Sciences: Future of Energy',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //t2
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T2-MIN: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Natural Sciences: Mining',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //t3
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T3-Ich: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Natural Sciences: Industrial Chemistry',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //t4
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T4-AMs: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Natural Sciences: Applied Materials',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //5
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T5-NRs: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Natural Sciences: Natural Resources',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //6
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T6-Ast: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Natural Sciences: Astronomy',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //7
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T7-ELQ: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Life Sciences: Environment and Life Quality',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //8
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T8-Bio: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Life Sciences: Biotechnology',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //9
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T9-MSA: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Mathematical Sciences: Mathematical Structures and their Applications',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+
+    //10
+    RichText(
+      text: const TextSpan(
+        style: TextStyle(
+          fontSize: 14.0,
+          color: Colors.black,
+        ),
+        children: <TextSpan>[
+          TextSpan(text: 'T10-MMA: ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+          TextSpan(text: 'Mathematical Sciences: Mathematical Modeling and its Applications',
+              style: TextStyle(
+                color: Palette.black,
+                fontFamily: 'OpenSans',
+              )
+          ),
+        ],
+      ),
+    ),
+  ];
+
+  //
+  var itemsString = [
     'T1-FOE:  Natural Sciences: Future of Energy',
     'T2-MIN: Natural Sciences: Mining',
     'T3-Ich: Natural Sciences: Industrial Chemistry',
@@ -28,6 +279,10 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
     'T8-Bio: Life Sciences: Biotechnology',
     'T9-MSA: Mathematical Sciences: Mathematical Structures and their Applications',
     'T10-MMA: Mathematical Sciences: Mathematical Modeling and its Applications'
+  ];
+
+  var itemsNumbers = [
+    0,1,2,3,4,5,6,7,8,9
   ];
 
   //which day
@@ -248,10 +503,10 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                   icon: const Icon(Icons.keyboard_arrow_down),
 
                   // Array list of items
-                  items: items.map((String items) {
+                  items: itemsNumbers.map((int i) {
                     return DropdownMenuItem(
-                      value: items,
-                      child: Text(items),
+                      value: itemsString[i],
+                      child: items[i],
                     );
                   }).toList(),
                   // After selecting the desired option,it will
