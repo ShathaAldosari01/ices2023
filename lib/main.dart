@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ices2023/screens/home/people/listOfPeople.dart';
 import 'package:ices2023/services/auth.dart';
+import 'package:ices2023/screens/home/Agenda/ListOfAgenda.dart';
+
 //auth? go home: go sign up
 import 'package:provider/provider.dart';
 
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-       home: Wrapper(),
+       home: ListOfAgenda(),
       ),
     );
   }

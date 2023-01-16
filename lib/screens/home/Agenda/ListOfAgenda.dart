@@ -25,95 +25,93 @@ class ListOfAgenda extends StatelessWidget {
 
     ),
 
-    body:
-
-    Column(
-        children: [
+    body:  Column(
+  children:[
 
     Container(
     margin: const EdgeInsets.only(top:20, left:20),
     child: DatePicker(
-    DateTime.now(),
-    height:100,
-    width:80,
-    initialSelectedDate:DateTime.now(),
-    selectionColor: Colors.green,
-    selectedTextColor: Colors.white,
-    dateTextStyle: TextStyle(
-      color: Palette.grey,
-      fontSize: 20,
-      fontWeight: FontWeight.w600,
-      fontFamily: 'OpenSans',
+      DateTime.now(),
+      height:100,
+      width:80,
+      initialSelectedDate:DateTime.now(),
+      selectionColor: Colors.green,
+      selectedTextColor: Colors.white,
+      dateTextStyle: TextStyle(
+        color: Palette.grey,
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        fontFamily: 'OpenSans',
+      ),
     ),
   ),
-  ),
 
-/*
-   StreamBuilder(    >> Agenda List, it is working but with the DatePicker not, I'll add a tab as date instaed of DatePicker.
+
+      StreamBuilder(  //  >> Agenda List, it is working but with the DatePicker not, I'll add a tab as date instaed of DatePicker.
 
         stream: FirebaseFirestore.instance
-           .collection('agendas')
-           .snapshots(),
+            .collection('agendas')
+            .snapshots(),
 
-       builder: (BuildContext context, AsyncSnapshot snapshot) {
-         if(snapshot.hasData ){
-           final agendas =snapshot.data!;
-           return ListView.builder(itemCount :snapshot.data!.docs.length,itemBuilder:(context,index) {
-             DocumentSnapshot documentSnapshot =snapshot.data!.docs[index];
-             return Card(
-                 child:ListTile(
-                   tileColor: Colors.white,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData ){
+            final agendas =snapshot.data!;
+            return ListView.builder(itemCount :snapshot.data!.docs.length,itemBuilder:(context,index) {
+              DocumentSnapshot documentSnapshot =snapshot.data!.docs[index];
+              return Card(
+                  child:ListTile(
+                    tileColor: Colors.white,
 
-                   title: Text(documentSnapshot.get("title"),
-                     style: TextStyle(
-                       color: Palette.blue,
-                       fontSize: 20,
-                       fontWeight: FontWeight.bold,
-                       fontFamily: 'OpenSans',
-                     ),),
+                    title: Text(documentSnapshot.get("title"),
+                      style: TextStyle(
+                        color: Palette.blue,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans',
+                      ),),
 
-                   subtitle:
-                   Row(
-                     crossAxisAlignment: CrossAxisAlignment.center,
-                     children: [
-                       Icon(Icons.person),
-                       Text(documentSnapshot.get("Persone"),
-                         style: TextStyle(
-                           color: Palette.black,
-                           fontSize: 10,
-                           fontWeight: FontWeight.normal,
-                           fontFamily: 'OpenSans',
-                         ),),
-                       Icon(Icons.location_on_outlined),
-                       Text(documentSnapshot.get("Location"),
-                         style: TextStyle(
-                           color: Palette.black,
-                           fontSize: 10,
-                           fontWeight: FontWeight.normal,
-                           fontFamily: 'OpenSans',
-                         ),),
-                     ], ),
+                    subtitle:
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.person),
+                        Text(documentSnapshot.get("Persone"),
+                          style: TextStyle(
+                            color: Palette.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'OpenSans',
+                          ),),
+                        Icon(Icons.location_on_outlined),
+                        Text(documentSnapshot.get("Location"),
+                          style: TextStyle(
+                            color: Palette.black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.normal,
+                            fontFamily: 'OpenSans',
+                          ),),
+                      ], ),
 
-                   leading:  Column(
-                     children: [
-                       Text(documentSnapshot.get("startTime"),
-                         style: TextStyle(
-                           color: Palette.black,
-                           fontSize: 15,
-                           fontWeight: FontWeight.bold,
-                           fontFamily: 'OpenSans',
-                         ),),
-                       Text(" - "),
-                       Text(documentSnapshot.get("endTime"),
-                         style: TextStyle(
-                           color: Palette.black,
-                           fontSize: 15,
-                           fontWeight: FontWeight.bold,
-                           fontFamily: 'OpenSans',
-                         ),),
-                     ], ),
+                    leading:  Column(
+                      children: [
+                        Text(documentSnapshot.get("startTime"),
+                          style: TextStyle(
+                            color: Palette.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),),
+                        Text(" - "),
+                        Text(documentSnapshot.get("endTime"),
+                          style: TextStyle(
+                            color: Palette.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),),
+                      ], ),
 
-                   /* leading: ClipRRect(         << OR This leading but need to design
+                    /* leading: ClipRRect(         << OR This leading but need to design
                          borderRadius: BorderRadius.circular(5.0),
                          child: Container(
                            height: 60.0,
@@ -127,24 +125,24 @@ class ListOfAgenda extends StatelessWidget {
                          ),
                          */
 
-                   trailing:Icon(Icons.arrow_forward_ios_rounded), // if zoom we add video icon
-                   onTap:(){
-                     //Navigator.push(context,MaterialPageRoute(builder: (context)=> postInformation(documentSnapshot)));
-                   },
-                 )
-             );
-           },
-           );
-         }
-         else{
-           return Center(
-             child:Text("please agin"),
-           );
-         }
-       }),
-       */
-            ],
-    ),
+                    trailing:Icon(Icons.arrow_forward_ios_rounded), // if zoom we add video icon
+                    onTap:(){
+                      //Navigator.push(context,MaterialPageRoute(builder: (context)=> postInformation(documentSnapshot)));
+                    },
+                  )
+              );
+            },
+            );
+          }
+          else{
+            return Center(
+              child:Text("please agin"),
+            );
+          }
+        }),
+])
+
+
 
   );
 }
