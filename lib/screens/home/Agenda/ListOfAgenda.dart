@@ -1,7 +1,9 @@
+import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:ices2023/config/palette.dart';
+import 'package:ices2023/screens/home/Agenda/AgendaInfo.dart';
 
 class ListOfAgenda extends StatefulWidget {
   const ListOfAgenda({Key? key}) : super(key: key);
@@ -9,6 +11,8 @@ class ListOfAgenda extends StatefulWidget {
   @override
   State<ListOfAgenda> createState() => _ListOfAgendaState();
 }
+
+
 
 class _ListOfAgendaState extends State<ListOfAgenda> {
   //attribute
@@ -291,7 +295,9 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
   // still design
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
+
+
+      /*appBar: AppBar(
         backgroundColor: Palette.white,
         title: const Text(
           'Agenda',
@@ -302,7 +308,15 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
             fontFamily: 'OpenSans',
           ),
         ),
+      ),*/
+
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text('Agenda',style: TextStyle( fontFamily: 'OpenSans'  ),),
+        backgroundColor: Palette.darkBlue,
       ),
+
+
       body: Column(children: [
 
         const SizedBox(
@@ -526,10 +540,7 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
         //agenda
         Expanded(
           child: StreamBuilder(
-            //  >> Agenda List, it is working but with the DatePicker not, I'll add a tab as date instaed of DatePicker.
-
-              stream:
-              FirebaseFirestore.instance.collection('agendas').snapshots(),
+              stream: FirebaseFirestore.instance.collection('agendas').snapshots(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   final agendas = snapshot.data!;
@@ -538,95 +549,107 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                     itemBuilder: (context, index) {
                       DocumentSnapshot documentSnapshot =
                       snapshot.data!.docs[index];
+
                       return Card(
                           child: ListTile(
-                            tileColor: Colors.white,
+                          //  documentSnapshot.get("title").toString()==("Break")? : ,
 
-                            title: Text(
-                              documentSnapshot.get("title"),
-                              style: const TextStyle(
-                                color: Palette.blue,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'OpenSans',
+                             tileColor: documentSnapshot.get("title").toString()==("Break")?
+                             Colors.grey[200] : Palette.white,
+
+                                title:
+                       documentSnapshot.get("title").toString()==("Break")?
+                       Center(
+                           child:
+                           Text( documentSnapshot.get("title"),
+                               style: const TextStyle(
+                                 color: Palette.grey,
+                                 fontSize: 20,
+                                 fontWeight: FontWeight.bold,
+                                 fontFamily: 'OpenSans',
+                               )))  :  Text(
+                                  documentSnapshot.get("title"),
+                                  style: const TextStyle(
+                                    color: Palette.blue,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'OpenSans',
+                                  ),
+                                ),
+
+                                subtitle:
+                                documentSnapshot.get("title").toString()==("Break")?
+                                    Text("") :
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.person),
+                                    Text(
+                                      documentSnapshot.get("Persone"),
+                                      style: const TextStyle(
+                                        color: Palette.black,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'OpenSans',
+                                      ),
+                                    ),
+                                    const Icon(Icons.location_on_outlined),
+                                    Text(
+                                      documentSnapshot.get("Location"),
+                                      style: const TextStyle(
+                                        color: Palette.black,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'OpenSans',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+
+                                leading:
+                                documentSnapshot.get("title").toString()==("Break")?
+                                Text("",):
+                                Column(
+                                  children: [
+                                    Text(
+                                      documentSnapshot.get("startTime"),
+                                      style: const TextStyle(
+                                        color: Palette.black,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'OpenSans',
+                                      ),
+                                    ),
+                                    const Text(" - "),
+                                    Text(
+                                      documentSnapshot.get("endTime"),
+                                      style: const TextStyle(
+                                        color: Palette.black,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'OpenSans',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                trailing:
+                                documentSnapshot.get("title").toString()==("Break")?
+                                Text("",):
+                                const Icon(Icons.arrow_forward_ios_rounded),
+                                // if zoom we add video icon
+                                onTap: () {
+                                  Navigator.push(context,MaterialPageRoute(builder: (context)=> AgendaInfo(documentSnapshot)));
+                                },
                               ),
-                            ),
-
-                            subtitle: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const Icon(Icons.person),
-                                Text(
-                                  documentSnapshot.get("Persone"),
-                                  style: const TextStyle(
-                                    color: Palette.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: 'OpenSans',
-                                  ),
-                                ),
-                                const Icon(Icons.location_on_outlined),
-                                Text(
-                                  documentSnapshot.get("Location"),
-                                  style: const TextStyle(
-                                    color: Palette.black,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: 'OpenSans',
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            leading: Column(
-                              children: [
-                                Text(
-                                  documentSnapshot.get("startTime"),
-                                  style: const TextStyle(
-                                    color: Palette.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'OpenSans',
-                                  ),
-                                ),
-                                const Text(" - "),
-                                Text(
-                                  documentSnapshot.get("endTime"),
-                                  style: const TextStyle(
-                                    color: Palette.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'OpenSans',
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            /* leading: ClipRRect(         << OR This leading but need to design
-                           borderRadius: BorderRadius.circular(5.0),
-                           child: Container(
-                             height: 60.0,
-                             width: 60.0,
-                             color: Palette.green,
-                            child: Text(
-                              documentSnapshot.get("startTime")
-                            +"\n"+"\n"+
-                                  documentSnapshot.get("startTime"),),
-                             ),
-                           ),
-                           */
-
-                            trailing: const Icon(Icons.arrow_forward_ios_rounded),
-                            // if zoom we add video icon
-                            onTap: () {
-                              //Navigator.push(context,MaterialPageRoute(builder: (context)=> postInformation(documentSnapshot)));
-                            },
-                          ));
+                      );
                     },
                   );
+
                 } else {
                   return const Center(
-                    child: Text("please agin"),
+                    child: Text("please again"),
                   );
                 }
               }),
@@ -671,3 +694,4 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
   }
 *
 * */
+

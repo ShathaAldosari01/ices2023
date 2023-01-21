@@ -6,6 +6,7 @@ import 'package:ices2023/config/palette.dart';
 import 'package:ices2023/screens/home/people/userInfo.dart';
 
 class ListOfPeople extends StatelessWidget {
+  const ListOfPeople({Key? key}) : super(key: key);
 
   Widget builUser(Person user) => ListTile(
     leading:CircleAvatar(
