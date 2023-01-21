@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ices2023/screens/home/Agenda/ListOfAgenda.dart';
+import 'package:ices2023/screens/home/Agenda/agenda.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user.dart';
