@@ -11,18 +11,18 @@ class Loading extends StatelessWidget {
       color: Palette.white,
       child: Center(
         child: SpinKitThreeBounce(
-          size: 35.0,
-          itemBuilder: (context, index){
-            final colors = [Palette.yellow, Palette.blue, Palette.green];
-            final color = colors[index % colors.length];
+            size: 35.0,
+            itemBuilder: (context, index){
+              final colors = [Palette.yellow, Palette.blue, Palette.green];
+              final color = colors[index % colors.length];
 
-            return DecoratedBox(
-                decoration: BoxDecoration(
-                  color: color,
-                  shape: BoxShape.circle,
-                )
-            );
-          }
+              return DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: color,
+                    shape: BoxShape.circle,
+                  )
+              );
+            }
         ),
       ),
     );

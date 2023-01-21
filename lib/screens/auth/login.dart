@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ices2023/config/palette.dart';
 
 import '../../services/auth.dart';
+import '../../shared/loading.dart';
 
 class Login extends StatefulWidget {
 
@@ -26,18 +27,21 @@ class _LoginState extends State<Login> {
   //for the form
   final _formKey = GlobalKey<FormState>();
 
+  //for loading
+  bool loading = false;
+
   //function
   Future openDialog()=> showDialog(
       context: context,
       builder: (context) =>  AlertDialog(
           title: const Text(
-              "The login failed",
+            "The login failed",
             style: TextStyle(
               fontFamily: 'OpenSans',
             ),
           ),
           content: const Text(
-              'could not log in with those credentials.',
+            'could not log in with those credentials.',
             style: TextStyle(
               fontFamily: 'OpenSans',
             ),
@@ -65,7 +69,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading?const Loading() :Scaffold(
       backgroundColor: Colors.white,
 
       //fix overload error
@@ -201,23 +205,29 @@ class _LoginState extends State<Login> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         decoration: const BoxDecoration(
-                            color: Palette.green,
+                          color: Palette.green,
                         ),
                         child:  Center(
                           child: InkWell(
                             onTap: ()async{
+                              setState(() {
+                                loading = true;
+                              });
                               if(_formKey.currentState!.validate() ){
                                 dynamic result  = await _auth.logInWithEmailAndPassword(email, password);
                                 if(result == null){
                                   openDialog();
+                                  setState(() {
+                                    loading = false;
+                                  });
                                 }
                               }
                             },
                             child: const Text(
                               'Log in',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
                                 fontFamily: 'OpenSans',
                               ),
                             ),

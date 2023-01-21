@@ -5,6 +5,8 @@ import 'package:ices2023/screens/home/people/person.dart';
 import 'package:ices2023/config/palette.dart';
 import 'package:ices2023/screens/home/people/userInfo.dart';
 
+import '../navbar/navbar.dart';
+
 class ListOfPeople extends StatelessWidget {
   const ListOfPeople({Key? key}) : super(key: key);
 
@@ -19,6 +21,7 @@ class ListOfPeople extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    drawer: Navbar(),
     appBar: AppBar(
       title: Text('People',style: TextStyle( fontFamily: 'OpenSans'  ),),
       backgroundColor: Palette.darkBlue,

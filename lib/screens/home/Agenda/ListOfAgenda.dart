@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:ices2023/config/palette.dart';
 import 'package:ices2023/screens/home/Agenda/AgendaInfo.dart';
 
+import '../navbar/navbar.dart';
+
 class ListOfAgenda extends StatefulWidget {
   const ListOfAgenda({Key? key}) : super(key: key);
 
@@ -295,7 +297,7 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
   // still design
   @override
   Widget build(BuildContext context) => Scaffold(
-
+    drawer: Navbar(),
 
       /*appBar: AppBar(
         backgroundColor: Palette.white,
@@ -311,7 +313,7 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
       ),*/
 
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
         title: Text('Agenda',style: TextStyle( fontFamily: 'OpenSans'  ),),
         backgroundColor: Palette.darkBlue,
       ),
