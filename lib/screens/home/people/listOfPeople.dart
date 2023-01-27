@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ices2023/screens/home/people/person.dart';
 import 'package:ices2023/config/palette.dart';
 import 'package:ices2023/screens/home/people/userInfo.dart';
 
@@ -9,15 +8,6 @@ import '../navbar/navbar.dart';
 
 class ListOfPeople extends StatelessWidget {
   const ListOfPeople({Key? key}) : super(key: key);
-
-  Widget builUser(Person user) => ListTile(
-    leading:CircleAvatar(
-        backgroundColor: Palette.yellow) ,
-    title:Text(user.name),
-    subtitle:Text(user.position) ,
-    trailing:Icon(Icons.arrow_forward_ios_rounded),
-  );
-
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -28,17 +18,16 @@ class ListOfPeople extends StatelessWidget {
     ),
     body:StreamBuilder(
       stream: FirebaseFirestore.instance
-          .collection('user1')
+          .collection('user1').orderBy('name')
           .snapshots(),
        builder: (BuildContext context, AsyncSnapshot snapshot) {
         if(snapshot.hasData ){
-          final users =snapshot.data!;
          return ListView.builder(itemCount :snapshot.data!.docs.length,itemBuilder:(context,index) {
            DocumentSnapshot documentSnapshot =snapshot.data!.docs[index];
            return Card(
                child:ListTile(
                  title: Text(documentSnapshot.get("name"),style: TextStyle( fontFamily: 'OpenSans'  ),),
-                 subtitle:Text(documentSnapshot.get("position"),style: TextStyle( fontFamily: 'OpenSans'  ),) ,
+                 subtitle:Text(documentSnapshot.get("role"),style: TextStyle( fontFamily: 'OpenSans'  ),) ,
                  leading:CircleAvatar(
                      backgroundColor: Palette.yellow) ,
                  trailing:Icon(Icons.arrow_forward_ios_rounded),
