@@ -18,19 +18,20 @@ Future<void> main() async {
   //for linking flutter to firebase - web
   if(kIsWeb){
     await Firebase.initializeApp(
-      options: FirebaseOptions(
-          apiKey: "AIzaSyDAJHOdC_SeEeZoWhWJaRvDzs5B9Njj3jE",
-          appId: "1:704605794254:web:50beffa90b49cf335cc59f",
-          messagingSenderId: "704605794254",
-          projectId: "ices2023",
-          /*optoinal*/
-          authDomain: "ices2023.firebaseapp.com",
-          storageBucket: "ices2023.appspot.com",
-          measurementId: "G-EJHT4T8BHX"
-      )
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyDAJHOdC_SeEeZoWhWJaRvDzs5B9Njj3jE",
+            appId: "1:704605794254:web:50beffa90b49cf335cc59f",
+            messagingSenderId: "704605794254",
+            projectId: "ices2023",
+            /*optional*/
+            authDomain: "ices2023.firebaseapp.com",
+            storageBucket: "ices2023.appspot.com",
+            measurementId: "G-EJHT4T8BHX"
+        )
     );
-  } else
-      await Firebase.initializeApp();
+  } else {
+    await Firebase.initializeApp();
+  }
 
   //the app
   runApp(const MyApp());
@@ -47,7 +48,14 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-       home: ListOfAgenda(),
+        routes: {
+          "/": (context)=>const Wrapper(),
+          "/agenda": (context)=>const Wrapper(),
+          "/people": (context)=> ListOfPeople(),
+          "/note": (context)=>const Wrapper(),
+          "/card": (context)=>const Wrapper(),
+          "/index": (context)=>const Wrapper(),
+        },
       ),
     );
   }
