@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ices2023/screens/home/businessCard/businessCard.dart';
 import 'package:ices2023/screens/home/people/listOfPeople.dart';
 import 'package:ices2023/services/auth.dart';
 import 'package:ices2023/screens/home/Agenda/ListOfAgenda.dart';
@@ -38,7 +39,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -51,9 +52,9 @@ class MyApp extends StatelessWidget {
         routes: {
           "/": (context)=>const Wrapper(),
           "/agenda": (context)=>const Wrapper(),
-          "/people": (context)=> ListOfPeople(),
+          "/people": (context)=> const ListOfPeople(),
           "/note": (context)=>const Wrapper(),
-          "/card": (context)=>const Wrapper(),
+          "/card": (context)=>const businessCard(),
           "/index": (context)=>const Wrapper(),
         },
       ),

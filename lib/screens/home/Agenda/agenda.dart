@@ -6,6 +6,7 @@ import 'package:ices2023/config/palette.dart';
 import 'package:ices2023/screens/home/Agenda/moreInfo.dart';
 import 'package:intl/intl.dart';
 
+import '../../../shared/loading.dart';
 import '../navbar/navbar.dart';
 
 class ListOfAgenda extends StatefulWidget {
@@ -286,6 +287,18 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
 
   var itemsNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   var itemsString = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+  var track = [
+    "Natural Sciences: Future of Energy",
+    "Natural Sciences: Mining",
+    "Natural Sciences: Industrial Chemistry",
+    "Natural Sciences: Applied Materials",
+    "Natural Sciences: Natural Resources",
+    "Natural Sciences: Astronomy",
+    "Life Sciences: Environment and Life Quality",
+    "Life Sciences: Biotechnology",
+    "Mathematical Sciences: Mathematical Structures and their Applications",
+    "Mathematical Sciences: Mathematical Modeling and its Applications",
+  ];
 
   //which day
   var day = [true, false, false];
@@ -513,10 +526,10 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
           child: StreamBuilder(
               stream:
               day[0]?
-              FirebaseFirestore.instance.collection('agenda').orderBy('time').snapshots():
+              FirebaseFirestore.instance.collection('MON').orderBy('time').snapshots():
               day[1]?
-              FirebaseFirestore.instance.collection('day2').orderBy('time').snapshots():
-              FirebaseFirestore.instance.collection('day3').orderBy('time').snapshots(),
+              FirebaseFirestore.instance.collection('TUE').orderBy('time').snapshots():
+              FirebaseFirestore.instance.collection('WED').orderBy('time').snapshots(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   final agendas = snapshot.data!;
@@ -526,9 +539,11 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                       DocumentSnapshot documentSnapshot =
                           snapshot.data!.docs[index];
 
-                      return documentSnapshot.get("track")=="all"||
+                      return documentSnapshot.data().toString().contains("track")? documentSnapshot.get("track")=="all"||
                           documentSnapshot.get("track") =="break"||
-                          documentSnapshot.get("track") ==dropDownValue? Card(
+                          documentSnapshot.get("track") ==dropDownValue||
+                          (documentSnapshot.get("track") =="many"  && (dropDownValue =="9" ||dropDownValue =="10" ||dropDownValue =="11" ))
+                      ? Card(
                         child: ListTile(
                           tileColor: documentSnapshot.get("title").toString() ==
                                   ("Break")
@@ -541,15 +556,19 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                                   child: Text(documentSnapshot.get("title"),
                                       style: const TextStyle(
                                         color: Palette.grey,
-                                        fontSize: 20,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'OpenSans',
                                       )))
                               : Text(
-                                  documentSnapshot.get("title"),
+                                  documentSnapshot.get("title")!=""?
+                                  documentSnapshot.get("title").toString().length<59?
+                                  documentSnapshot.get("title"):
+                                  documentSnapshot.get("title").toString().substring(0, documentSnapshot.get("title").toString().indexOf(" ",49))+" ..."
+                                      :track[int.parse(dropDownValue)-1],
                                   style: const TextStyle(
                                     color: Palette.blue,
-                                    fontSize: 20,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'OpenSans',
                                   ),
@@ -558,31 +577,33 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                           subtitle:  documentSnapshot.get("track")=="all"||
                               documentSnapshot.get("track") =="break"
                               ? const SizedBox()
-                              : Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const Icon(Icons.person),
-                                    Text(
-                                      documentSnapshot.get("speakerType"),
-                                      style: const TextStyle(
-                                        color: Palette.black,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'OpenSans',
+                              : SingleChildScrollView(
+                                child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      const Icon(Icons.person),
+                                      Text(
+                                        documentSnapshot.get("speaker"),
+                                        style: const TextStyle(
+                                          color: Palette.black,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: 'OpenSans',
+                                        ),
                                       ),
-                                    ),
-                                    const Icon(Icons.location_on_outlined),
-                                    Text(
-                                      documentSnapshot.get("location"),
-                                      style: const TextStyle(
-                                        color: Palette.black,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'OpenSans',
+                                      const Icon(Icons.location_on_outlined),
+                                      Text(
+                                        documentSnapshot.get("location"),
+                                        style: const TextStyle(
+                                          color: Palette.black,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.normal,
+                                          fontFamily: 'OpenSans',
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                    ],
+                                  ),
+                              ),
 
                           //time
                           leading:
@@ -605,7 +626,7 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                                       ),
                                       const SizedBox(
                                         height: 10,
-                                      ),
+                                      ),documentSnapshot.data().toString().contains("endTime")?
                                       Text(
                                           DateFormat('hh:mm').format(documentSnapshot.get("endTime").toDate()),
                                         style: const TextStyle(
@@ -613,18 +634,13 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                                           fontSize: 15,
                                           fontFamily: 'OpenSans',
                                         ),
-                                      ),
+                                      ): const SizedBox(),
                                     ],
                                   ),
                             ),
-
-                          trailing:  documentSnapshot.get("track")=="all"||
-                              documentSnapshot.get("track") =="break"
-                              ? const SizedBox()
-                              : const Icon(Icons.arrow_forward_ios_rounded),
                           // if zoom we add video icon
                           onTap: () {
-                            String col = day[0]?"agenda":day[1]? "day2":day[2]? "day3":"";
+                            String col = day[0]?"MON":day[1]? "TUE":day[2]? "WED":"";
                             if( documentSnapshot.get("track")!="all"&&
                                 documentSnapshot.get("track") !="break") {
                               Navigator.push(
@@ -635,17 +651,12 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                             }
                           },
                         ),
-                      ):const SizedBox();
+                      ):const SizedBox():const SizedBox();
                     },
                   );
                 } else {
                   return const Center(
-                    child: Text(
-                        "please again",
-                      style: TextStyle(
-                          fontFamily: 'OpenSans',
-                      ),
-                    ),
+                    child:  Loading(),
                   );
                 }
               }),

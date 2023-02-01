@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ices2023/config/palette.dart';
 import 'package:ices2023/screens/home/people/userInfo.dart';
 
+import '../../../shared/loading.dart';
 import '../navbar/navbar.dart';
 
 class ListOfPeople extends StatelessWidget {
@@ -13,7 +14,7 @@ class ListOfPeople extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     drawer: Navbar(),
     appBar: AppBar(
-      title: Text('People',style: TextStyle( fontFamily: 'OpenSans'  ),),
+      title: const Text('People',style: TextStyle( fontFamily: 'OpenSans'  ),),
       backgroundColor: Palette.darkBlue,
     ),
     body:StreamBuilder(
@@ -26,11 +27,11 @@ class ListOfPeople extends StatelessWidget {
            DocumentSnapshot documentSnapshot =snapshot.data!.docs[index];
            return Card(
                child:ListTile(
-                 title: Text(documentSnapshot.get("name"),style: TextStyle( fontFamily: 'OpenSans'  ),),
-                 subtitle:Text(documentSnapshot.get("role"),style: TextStyle( fontFamily: 'OpenSans'  ),) ,
-                 leading:CircleAvatar(
+                 title: Text(documentSnapshot.get("name"),style: const TextStyle( fontFamily: 'OpenSans'  ),),
+                 subtitle:Text(documentSnapshot.get("role"),style: const TextStyle( fontFamily: 'OpenSans'  ),) ,
+                 leading:const CircleAvatar(
                      backgroundColor: Palette.yellow) ,
-                 trailing:Icon(Icons.arrow_forward_ios_rounded),
+                 trailing:const Icon(Icons.arrow_forward_ios_rounded),
                  onTap:(){
                    Navigator.push(context,MaterialPageRoute(builder: (context)=> UserInformation(documentSnapshot)));
                  },
@@ -40,22 +41,19 @@ class ListOfPeople extends StatelessWidget {
 
          );}
         else{
-          return Center(
-              child:Text("please agin"),
+          return const Center(
+              child: Loading(),
           );
         }
 
       }),
     );
-
-
-
 }
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title:Text('People'),
+        title:const Text('People'),
       ),
     );
   }

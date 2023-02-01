@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
+import 'package:ices2023/models/user.dart';
 
 class DatabaseService{
   /*users*/
@@ -20,8 +21,23 @@ class DatabaseService{
     });
   }
   //3. get users
-  Stream<QuerySnapshot> get users{
-    return userCollection.snapshots();
+
+  //user list from snapshot
+  List<Users> _userListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc){
+      return Users(
+        uid: doc.get("uid"),
+        name: doc.get("name"),
+        specialty: doc.get("specialty"),
+        phoneNumber: doc.get("phoneNumber"),
+        email: doc.get("email"),
+        linkedin:  doc.get("linkedin"),
+      );
+    }).toList();
+  }
+
+  Stream<List<Users>> get users{
+    return userCollection.snapshots().map(_userListFromSnapshot);
   }
   /*end of user*/
 
