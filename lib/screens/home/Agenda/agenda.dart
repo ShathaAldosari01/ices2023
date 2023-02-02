@@ -5,7 +5,6 @@ import 'package:flutter/rendering.dart';
 import 'package:ices2023/config/palette.dart';
 import 'package:ices2023/screens/home/Agenda/moreInfo.dart';
 import 'package:intl/intl.dart';
-
 import '../../../shared/loading.dart';
 import '../navbar/navbar.dart';
 
@@ -638,6 +637,9 @@ class _ListOfAgendaState extends State<ListOfAgenda> {
                                     ],
                                   ),
                             ),
+
+
+
                           // if zoom we add video icon
                           onTap: () {
                             String col = day[0]?"MON":day[1]? "TUE":day[2]? "WED":"";

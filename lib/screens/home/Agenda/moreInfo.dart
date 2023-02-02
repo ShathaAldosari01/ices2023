@@ -88,7 +88,7 @@ class AgendaInfo extends StatelessWidget {
                     'Speaker',
                     style: TextStyle(
                       fontSize: 16.0,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       color: Palette.black,
                       fontFamily: 'OpenSans',
                     ),
@@ -104,7 +104,7 @@ class AgendaInfo extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.normal,
-                        color: Palette.black,
+                        color: Palette.blue,
                         fontFamily: 'OpenSans',
                       ),
                       softWrap: true,
@@ -128,7 +128,7 @@ class AgendaInfo extends StatelessWidget {
                 'Time',
                 style: TextStyle(
                   fontSize: 16.0,
-                  fontWeight: FontWeight.normal,
+                  fontWeight: FontWeight.bold,
                   color: Palette.black,
                   fontFamily: 'OpenSans',
                 ),
@@ -166,7 +166,7 @@ class AgendaInfo extends StatelessWidget {
                   "Building number",
                     style: TextStyle(
                       fontSize: 16.0,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       color: Palette.black,
                       fontFamily: 'OpenSans',
                     ),
@@ -198,7 +198,7 @@ class AgendaInfo extends StatelessWidget {
                     "Room number",
                     style: TextStyle(
                       fontSize: 16.0,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       color: Palette.black,
                       fontFamily: 'OpenSans',
                     ),
@@ -225,8 +225,9 @@ class AgendaInfo extends StatelessWidget {
             ):
 
             //location
-            documentSnapshot.get("buildingNum").toString()!=""?
+            documentSnapshot.get("location").toString()!=""?
             Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
                   padding:const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
@@ -236,7 +237,7 @@ class AgendaInfo extends StatelessWidget {
                     "Location",
                     style: TextStyle(
                       fontSize: 16.0,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       color: Palette.black,
                       fontFamily: 'OpenSans',
                     ),
@@ -286,7 +287,7 @@ class AgendaInfo extends StatelessWidget {
                     'Track',
                     style: TextStyle(
                       fontSize: 16.0,
-                      fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.bold,
                       color: Palette.black,
                       fontFamily: 'OpenSans',
                     ),
