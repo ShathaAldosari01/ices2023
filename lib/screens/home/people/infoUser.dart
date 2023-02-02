@@ -4,6 +4,8 @@ import 'package:ices2023/config/palette.dart';
 import 'package:ices2023/shared/loading.dart';
 import 'package:intl/intl.dart';
 
+import '../Agenda/InfoAgenda.dart';
+
 class UserInformation extends StatefulWidget {
 
   final String uid;
@@ -26,6 +28,7 @@ class _UserInformationState extends State<UserInformation> {
 
   void initState() {
     getUser();
+    super.initState();
   }
 
   getUser() async {
@@ -55,114 +58,338 @@ class _UserInformationState extends State<UserInformation> {
           backgroundColor: Palette.darkBlue,
         ),
 
-        body: Column(
-          mainAxisAlignment:MainAxisAlignment.spaceEvenly ,
-          crossAxisAlignment:CrossAxisAlignment.stretch,
-          children: [
-            Container(
-                width: 100,
-                height:200,
-                color: Palette.yellow,
-                child:Column(
-
-                  children:[
-                    const Text("Person Information",textAlign:TextAlign.center ,
-                      style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal , color:Palette.darkBlue,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
-
+        body: ListView(
+          children:[
+            Column(
+              crossAxisAlignment:CrossAxisAlignment.stretch,
+              children: [
+                //name
+                userData["nameWithPosition"].toString()!=""?
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //name
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                      color: Palette.lightGray,
+                      child:  const Text(
+                        "Name",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
                     ),
-                    Text(userData["nameWithPosition"],textAlign:TextAlign.center ,
-                      style: const TextStyle(fontSize:9 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans',fontWeight: FontWeight.bold ),
-
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16),
+                      child:Text(
+                        userData["nameWithPosition"].toString(),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
                     ),
-                    const Text("Nationality",textAlign:TextAlign.center ,
-                      style: TextStyle(fontSize:10 , fontStyle:FontStyle.normal , color:Palette.darkBlue,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
-
-                    ),
-                    Text(userData["nationality"],textAlign:TextAlign.center ,
-                      style: const TextStyle(fontSize:9 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),
-
-                    ),
-                    const Text("Position",textAlign:TextAlign.center ,
-                      style: TextStyle(fontSize:10 , fontStyle:FontStyle.normal , color:Palette.darkBlue,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
-
-                    ),
-                    Text(userData["Position"],textAlign:TextAlign.center ,
-                      style: const TextStyle(fontSize:9 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),
-
-                    ),
-
-                    const Text("Country Of Residency",textAlign:TextAlign.center ,
-                      style: TextStyle(fontSize:10 , fontStyle:FontStyle.normal , color:Palette.darkBlue,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
-
-                    ),
-                    Text(userData["countryOfResidency"],textAlign:TextAlign.center ,
-                      style: const TextStyle(fontSize:9 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),
-
-                    ),
-                    const Text("Affiliation",textAlign:TextAlign.center ,
-                      style: TextStyle(fontSize:10 , fontStyle:FontStyle.normal , color:Palette.darkBlue,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
-
-                    ),
-                    Text(userData["affiliation"],textAlign:TextAlign.center ,
-                      style: const TextStyle(fontSize:9 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),
-
-                    ),
-                    const Text("Email",textAlign:TextAlign.center ,
-                      style: TextStyle(fontSize:10 , fontStyle:FontStyle.normal , color:Palette.darkBlue,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
-
-                    ),
-                    Text(userData["email"],textAlign:TextAlign.center ,
-                      style: const TextStyle(fontSize:9 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),
-
-                    ),
-
-
                   ],
+                ):const SizedBox(),
+                //end name
 
-                )
+                //nationality
+                userData["nationality"].toString()!=""?
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //nationality
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                      margin: const EdgeInsets.only(top: 20.0),
+                      color: Palette.lightGray,
+                      child:  const Text(
+                        "Nationality",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16),
+                      child:Text(
+                        userData["nationality"].toString(),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
+                ):const SizedBox(),
+                //end nationality
 
+                //Position
+                userData["Position"].toString()!=""?
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //name
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                      margin: const EdgeInsets.only(top: 20.0),
+                      color: Palette.lightGray,
+                      child:  const Text(
+                        "Position",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16),
+                      child:Text(
+                        userData["Position"].toString(),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
+                ):const SizedBox(),
+                //end Position
 
+                //countryOfResidency
+                userData["countryOfResidency"].toString()!=""?
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //name
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                      margin: const EdgeInsets.only(top: 20.0),
+                      color: Palette.lightGray,
+                      child:  const Text(
+                        "Country of Residency",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16),
+                      child:Text(
+                        userData["countryOfResidency"].toString(),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
+                ):const SizedBox(),
+                //end countryOfResidency
+
+                //affiliation
+                userData["affiliation"].toString()!=""?
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //name
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                      margin: const EdgeInsets.only(top: 20.0),
+                      color: Palette.lightGray,
+                      child:  const Text(
+                        "Affiliation",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16),
+                      child:Text(
+                        userData["affiliation"].toString(),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
+                ):const SizedBox(),
+                //end affiliation
+
+                //email
+                userData["email"].toString()!=""?
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //email
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                      margin: const EdgeInsets.only(top: 20.0),
+                      color: Palette.lightGray,
+                      child:  const Text(
+                        "Email",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16),
+                      child:Text(
+                        userData["email"].toString(),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                          color: Palette.blue,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
+                ):const SizedBox(),
+                //end email
+
+                //theme
+                userData["theme"].toString()!=""?
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //email
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                      margin: const EdgeInsets.only(top: 20.0),
+                      color: Palette.lightGray,
+                      child:  const Text(
+                        "Theme",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16),
+                      child:Text(
+                        userData["theme"].toString(),
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.normal,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
+                ):const SizedBox(),
+                //end theme
+
+                //title
+                userData["title"].toString()!=""?
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    //title
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 10),
+                      margin: const EdgeInsets.only(top: 20.0),
+                      color: Palette.lightGray,
+                      child:  const Text(
+                        "Presentation Subject",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Palette.black,
+                          fontFamily: 'OpenSans',
+                        ),
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    InkWell(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 16),
+                        child:Text(
+                          userData["title"].toString(),
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.normal,
+                            color: Palette.black,
+                            fontFamily: 'OpenSans',
+                          ),
+                          softWrap: true,
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                      onTap: (){
+                        if(userData["agendaId"]!="")
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=> AgendaInfo(userData["agendaId"],"")));
+                      },
+                    ),
+                  ],
+                ):const SizedBox(),
+                //end title
+              ],
             ),
-            Container(
-                width: 100,
-                height:200,
-                color: Palette.green,
-                child:Column(
-
-                    children:[
-                      const Text("Theme",textAlign:TextAlign.center ,
-                        style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal ,color:Palette.darkBlue,fontFamily: 'OpenSans',fontWeight: FontWeight.bold ),
-                      ),
-                      // Text(formattedDate(documentSnapshot.get("date")),textAlign:TextAlign.center ,
-                      //
-                      //   style: TextStyle(fontSize:14 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),
-                      // ),
-                      Text(userData["theme"],textAlign:TextAlign.center ,
-                        style: const TextStyle(fontSize:9 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold),
-                      ),
-                    ]
-                )
-            ),
-            Container(
-                width: 100,
-                height:200,
-                color: Palette.blue,
-                child:Column(
-
-                    children:[
-                      const Text("Presentation Subject",textAlign:TextAlign.center ,
-                        style: TextStyle(fontSize:16 , fontStyle:FontStyle.normal ,color:Palette.darkBlue ,fontFamily: 'OpenSans' ,fontWeight: FontWeight.bold ),
-                      ),
-                      // Text(formattedDate(documentSnapshot.get("date")),textAlign:TextAlign.center ,
-                      //   style: TextStyle(fontSize:14 , fontStyle:FontStyle.normal , color:Colors.white ,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),
-                      // ),
-                      Text(userData["title"],textAlign:TextAlign.center ,
-                        style: const TextStyle(fontSize:9 , fontStyle:FontStyle.normal , color:Colors.white,fontFamily: 'OpenSans',fontWeight: FontWeight.bold ),
-                      ),
-                    ]
-                )
-            ),
-          ],
+          ]
         )
     );
 
